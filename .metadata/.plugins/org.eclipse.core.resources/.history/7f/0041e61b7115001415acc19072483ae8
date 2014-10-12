@@ -1,0 +1,29 @@
+package com.mx262cal726.BladeRunner.Window;
+
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+ public class Window
+ {
+	 
+  public Window(int w, int h, String title, Games games)
+  {
+	games.setPreferredSize(new Dimension(w,h));
+	games.setMaximumSize(new Dimension(w,h));
+    games.setMinimumSize(new Dimension(w,h));
+	
+	JFrame frame = new JFrame(title);
+	frame.add(games);
+	frame.pack();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setResizable(false);
+	frame.setLocationRelativeTo(null);
+	frame.setVisible(true);
+	
+	games.start();
+  }
+  
+  
+  }

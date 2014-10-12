@@ -1,0 +1,31 @@
+package com.mx262cal726.ResizeablePacman.Window;
+
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
+public class Window
+{
+	private int x, y;
+	private String string;
+
+	public Window(int x, int y, String string, ResizeablePacman pacman)
+	{
+	  pacman.setPreferredSize(new Dimension(x,y));
+	  pacman.setMaximumSize(new Dimension(x,y));
+	  pacman.setMinimumSize(new Dimension(x,y));
+	  
+	  JFrame frame = new JFrame(string);
+	  
+	  frame.add(pacman);
+	  frame.pack();
+	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  frame.setResizable(false);
+	  frame.setLocationRelativeTo(null);
+	  frame.setVisible(true);
+	  
+	  pacman.start();
+	  
+	}
+	
+	
+}

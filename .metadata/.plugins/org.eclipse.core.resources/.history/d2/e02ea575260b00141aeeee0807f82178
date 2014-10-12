@@ -1,0 +1,136 @@
+
+public class Turtle 
+{
+	/* 
+	 * Name: Jane-Joe Student <<< --- Replace with Your Name 
+	 * Login: cs11wXX <<< --- Use your cs11w course-specific account name 
+	 * Date: Month Day, Year 
+	 * File: Name of this file, for example: CS11Turtle.java 
+	 * Sources of Help: ... (for example: names of people, books, websites, etc.) 
+	 * 
+	 * Describe what this program does here. 
+	 */ 
+	 
+	import turtleClasses.*; 
+	import java.awt.Color; 
+	 
+	/* 
+	 * Name: Class name 
+	 * Purpose: Briefly describe the purpose of this class 
+	 */ 
+	 
+	public class Turtle extends Turtle 
+	{ 
+	 private final static int CHAR_WIDTH = 40; 
+	 private final static int LINE_HEIGHT = 80; 
+	 private final static int CHAR_PADDING = 40; 
+	 private final static int LINE_PADDING = 40; 
+	 private final static int LINE_SPACE = LINE_HEIGHT + LINE_PADDING; 
+	 private final static int CHAR_SPACE = CHAR_WIDTH + CHAR_PADDING; 
+	 
+	 private final static int START_X_1 = 10; // starting x offset for line 1 
+	 private final static int START_X_2 = 10; // starting x offset for line 2 
+	 private final static int START_X_3 = 10; // starting x offset for line 3 
+	 private final static int START_Y = 10; // starting y offset 
+	 
+	 private final static int PEN_WIDTH = 10; 
+	 private final static Color PEN_COLOR = Color.BLUE; 
+	 
+	 private final static int WORLD_WIDTH = 600; 
+	 private final static int WORLD_HEIGHT = 400; 
+	 
+	 /* 
+	 * Delay between turtle actions (turns, moves) in milliseconds. 
+	 * 1000 = 1 sec. so 100 = 0.1 sec. 
+	 */ 
+	 private final static int DELAY = 100; 
+	 
+	 /* 
+	 * Name: Constructor name 
+	 * Purpose: Briefly describe the purpose of this constructor 
+	 * Parameters: List all parameters and their types and what they represent. 
+	 * If no parameters, just state None. 
+	 */ 
+	 
+	 public CS11Turtle(World w, int delay){ 
+	 super(w, delay); 
+	 } 
+	 
+	 /* 
+	 * Name: Method name 
+	 * Purpose: Briefly describe the purpose of this method 
+	 * Parameters: List all parameters and their types and what they represent. 
+	 * If no parameters, just state None. 
+	 * Return: Specify the return type and what it represents. 
+	 * If no return value, just specify void. 
+	 */ 
+	 
+	 private void drawC(int x, int y) 
+	 { 
+	 penUp();  moveTo(x, y); // always start in upper left corner of this char block 
+	 turnToFace(getXPos() + 1, getYPos()); // face right 
+	 penDown(); 
+	 forward(40); 
+	 penUp(); 
+	 backward(40); 
+	 turnRight(); 
+	 penDown(); 
+	 forward(80); 
+	 turnLeft(); 
+	 forward(40); 
+	 } 
+	 
+	 /* 
+	 * Name: Method name 
+	 * Purpose: Briefly describe the purpose of this method 
+	 * Parameters: List all parameters and their types and what they represent. 
+	 * If no parameters, just state None. 
+	 * Return: Specify the return type and what it represents. 
+	 * If no return value, just specify void. 
+	 */ 
+	 
+	 private void drawS(int x, int y) 
+	 { 
+	 penUp(); 
+	 moveTo(x, y); 
+	 turnToFace(getXPos() + 1, getYPos()); 
+	 
+	 /* TODO: Complete this part to draw the 'S' */ 
+	 } 
+	 
+	 /* TODO: Add any remaining methods to draw all the other characters */ 
+	 
+	 
+	 /* 
+	 * Name: Method name 
+	 * Purpose: Briefly describe the purpose of this method 
+	 * Parameters: List all parameters and their types and what they represent. 
+	 * If no parameters, just state None. 
+	 * Return: Specify the return type and what it represents. 
+	 * If no return value, just specify void. 
+	 */ 
+	 
+	 public static void main(String [] args) 
+	 { 
+	 int startX1 = START_X_1, // starting x offset for line 1 
+	 startX2 = START_X_2, // starting x offset for line 2 
+	 startX3 = START_X_3; // starting x offset for line 3 
+	 int startY = START_Y; // starting y offset 
+	 
+	 int x, y; 
+	 
+	 World w = new World(WORLD_WIDTH, WORLD_HEIGHT); 
+	 CS11Turtle myTurtle = new CS11Turtle(w, DELAY); 
+	 
+	 myTurtle.setPenWidth(PEN_WIDTH); 
+	 myTurtle.setPenColor(PEN_COLOR); 
+	 
+	 myTurtle.drawC(x = startX1, y = startY); 
+	 myTurtle.drawS(x += CHAR_SPACE, y); 
+	 
+	 /* TODO: Complete this main method to draw the remaining text */ 
+	 } 
+	 
+	} // End of public class CS11Turtle extends Turtle 
+
+}

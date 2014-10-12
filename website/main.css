@@ -1,0 +1,61 @@
+
+body{
+  background:#999;
+  font-family:arial;
+}
+
+header {
+  background:#999;
+  color: white;
+  padding: 15px 15px 0 15px;
+}
+
+header h1{
+   margin: 0;
+}
+
+nav ul{
+  margin:0;
+  padding: 0 0 0 15px;
+   display: inline;
+}
+
+nav ul li{
+   background:#345;
+   color:white;
+   display: inline-block;
+   list-style-type:none;
+   padding:5px 15px;
+}
+
+nav ul li a{
+   color: white;
+}
+
+a{
+  color:blue;
+}
+
+.col {
+   background:#333;
+   border-radius:5px;
+   color:white;
+   padding:10px .5%;
+   float:left;
+   margin:.5%;
+   width:31%;
+}
+
+footer{
+   clear:both;
+}
+header h2{
+   background:#546;
+   padding:0 10px 0 10px;
+ }
+html{
+  border: double;
+}
+
+
+
