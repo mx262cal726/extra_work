@@ -1,0 +1,59 @@
+package com.mx262cal726.whoisnear;
+
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+public class MapFragment extends Fragment{
+
+	View view;
+	Fragment frag, fragTwo,fragEditNames,fragGamePieces;
+	FragmentTransaction fragTransaction,fragTwoTransaction;
+	FragmentTransaction fragEditNamesTransaction,fragPiecesTransaction;
+	Button buttonNames;
+	Fragment dialogFrag;
+	FragmentTransaction fragDialogFragTransaction;
+	Button buttonPieces;
+	public MapFragment()
+	{
+		
+	}
+	
+	
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
+	 view = inflater.inflate(R.id.map_container,container,false);
+    
+
+     frag = new FragMap1();
+
+	fragTransaction=getFragmentManager().beginTransaction().replace(R.id.map_container,frag);
+    fragTransaction.commit();
+//	buttonPieces = (Button)view.findViewById(R.id.pieceButton);
+	
+	
+//	buttonPieces.setOnClickListener(new OnClickListener(){
+	/*	@Override
+		public void onClick(View view)
+		{
+			System.out.println("buttons PIECES was clicked");
+			//getFragmentManager().beginTransaction().remove(fragEditNames).commit();
+			fragGamePieces = new ChooseGamePieces();
+			fragPiecesTransaction=getFragmentManager().beginTransaction()
+		      .replace(R.id.container, fragGamePieces);
+			fragPiecesTransaction.commit();
+		}
+	});*/
+
+
+	return view;
+  }
+
+
+}

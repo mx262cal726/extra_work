@@ -1,0 +1,7 @@
+AbstractTextEditor.Color.Background=188,188,188
+AbstractTextEditor.Color.Background.SystemDefault=false
+currentLineColor=255,255,255
+eclipse.preferences.version=1
+lineNumberColor=0,0,0
+lineNumberRuler=true
+overviewRuler_migration=migrated_3.1

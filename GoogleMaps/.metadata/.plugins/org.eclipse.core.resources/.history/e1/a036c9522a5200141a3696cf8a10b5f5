@@ -1,0 +1,52 @@
+package com.mx262cal726.whoisnear;
+
+
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.*;
+import android.support.v7.app.ActionBarActivity;
+import android.location.LocationManager;
+import android.location.Location;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class MapActivity extends ActionBarActivity {
+
+	LocationManager locationManager;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.map_activity_layout);
+		 GoogleMap map = ((MapFragment) getFragmentManager()
+	                .findFragmentById(R.id.map)).getMap();
+		 String locationProvider = LocationManager.NETWORK_PROVIDER;
+		 Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+		 System.out.println("loaction = "+locationProvider+ " lastKnowLocation = " +" lastKnowLocation"+lastKnownLocation.toString() );
+	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+	                new LatLng(-18.142, 178.431), 2));
+
+	        // Other supported types include: MAP_TYPE_NORMAL,
+	        // MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
+	        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.map_activity_layout, menu);
+		return true;
+	} 
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}

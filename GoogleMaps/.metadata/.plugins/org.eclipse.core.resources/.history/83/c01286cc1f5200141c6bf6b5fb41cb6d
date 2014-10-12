@@ -1,0 +1,29 @@
+package com.mx262cal726.whoisnear;
+
+import com.google.android.gms.common.ErrorDialogFragment;
+
+import android.app.Dialog;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class CurrentLocDialog extends DialogFragment{
+
+	private Dialog dialog;
+
+	public CurrentLocDialog()
+	{
+		new ErrorDialogFragment();
+        dialog =null;
+	}
+	
+	@Override
+	public View onCreateView( LayoutInflater inflate, ViewGroup container, 
+			Bundle savedInstanceState){
+				return container;
+		
+	}
+	
+}
