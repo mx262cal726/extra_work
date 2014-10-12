@@ -1,0 +1,51 @@
+package com.mx262cal726.btnfragment;
+
+import com.mx262cal726.t3.R;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+
+public class EnterPlayerNamesDialog extends DialogFragment 
+{
+  public EnterPlayerNamesDialog()
+  {
+	  
+  }
+  
+  public Dialog onCreateDialog(Bundle savedInstanceState)
+  {
+	AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+	LayoutInflater inflater = getActivity().getLayoutInflater();
+	
+	builder.setView(inflater.inflate(R.layout.enter_player_names_dialog_layout, null));
+	
+	
+	return null;
+	
+  }
+  
+  public interface NamesDialogInterface
+  {
+	public void onDialogPositiveClick(DialogFragment dialog);
+	public void onDialogNegativeClick(DialogFragment dialog);
+  }
+  NamesDialogInterface iListener;
+  
+  @Override
+  public void onAttach(Activity activity)
+  {
+	super.onAttach(activity);
+	try{
+		iListener = (NamesDialogInterface) activity;
+	}catch(ClassCastException e){
+		throw new ClassCastException(activity.toString()+ " must implement " +
+				"NamesDialogInterface");
+		
+	}
+  }
+  
+}

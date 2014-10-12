@@ -1,0 +1,25 @@
+package com.example.t3;
+
+import android.app.ListFragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+
+public class NamesFragment extends ListFragment 
+{
+	View view;
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
+	view = inflater.inflate(R.layout.name_editor,container,false);
+	return view;
+  }
+  public void onActivityCreated(Bundle savedInstanceState)
+  {
+	  super.onActivityCreated(savedInstanceState);
+	  ArrayAdapter.createFromResource(getActivity(), R.array.button_choices, R.layout.name_editor);
+  }
+}

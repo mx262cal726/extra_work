@@ -1,0 +1,7 @@
+package com.mx262cal726.btnfragment;
+
+import android.support.v4.app.DialogFragment;
+
+public class EnterPlayerNamesDialog extends DialogFragment {
+
+}

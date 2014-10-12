@@ -1,0 +1,526 @@
+package com.mx262cal726.t3;
+
+import java.util.Random;
+
+import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ComputerActivity extends ActionBarActivity {
+
+
+	public final static String EXTRA_MESSAGE = "com.example.t3.MESSAGE";
+	public final static String nameWin = "com.example.t3.win";
+	private String[] names = {};
+	private int [][] position;
+	private String gamePieces;
+    ImageButton imageButton1;
+    ImageButton imageButton2;
+    ImageButton imageButton3;
+    ImageButton imageButton4;
+    ImageButton imageButton5;
+    ImageButton imageButton6;
+    ImageButton imageButton7;
+    ImageButton imageButton8;
+    ImageButton imageButton9;
+    public int x, y;
+    ImageView iV1;
+    TextView tV1, tV2;
+    Button newGame, exit;
+    public String p1,p2;
+    private int piecesValue;
+    private int gamePieceTicInt, gamePieceTacInt;
+    String winnerName, loserName,playerOne,playerTwo,player1,player2;
+    long start, stop;
+    Random random;
+    public boolean player;
+    public static int rowOne,rowTwo,rowThree,columnOne,columnTwo,columnThree,crossOne,crossTwo;
+    public static int rowOnex,rowTwox,rowThreex,columnOnex,columnTwox,columnThreex,crossOnex,crossTwox;
+    private boolean one=true,two=true,three=true,four=true,five=true,
+    		six=true,seven=true,eight=true,nine=true,startPlayer =true;
+    
+    public ComputerActivity()
+    {
+    	
+    }
+    public ComputerActivity(String player1, String player2)
+    {
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	p1 =player1;
+    	p2=player2;
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	
+    	System.out.println(p1 + "  " + p2);
+    	
+        System.out.println(player1 + "  " + player2);
+
+    }
+     
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_intro);
+		addButtonListener(); 
+		position = new int[3][3];
+		for(int i=0; i<2; i++)
+		{
+			for(int j=0; j<2; j++)
+			position[i][j] = 10;
+		}
+			
+		iV1 = (ImageView) findViewById(R.id.iV1);
+		tV1 = (TextView) findViewById(R.id.tV1);
+		//tV2 = (TextView) findViewById(R.id.tV2);
+		tV1.setTextSize(25);
+    	System.out.println(p1 + " this is onCreate " + p2);
+
+    	random = new Random();
+		//tV2.setTextSize(25);
+
+    	
+		Intent intent = getIntent();
+		names = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE);
+		piecesValue = intent.getIntExtra(MainActivity.BUTTON_CHOICE, 0);
+		System.out.println(" piecesValue = " +piecesValue);
+		
+	    setGamePiece(piecesValue);
+		//String win = intent.getStringExtra(MainActivity.nameWin);
+        player1=names[0];
+        player2=names[1];
+        tV1.setText(names[0]+" vs " + names[1]);
+       // tV2.setText(names[1]);
+		
+	}
+	private void setGamePiece(int x)
+	{
+      
+      switch(x)
+      {
+        case 0:
+    	  gamePieceTicInt = R.drawable.tic;
+          gamePieceTacInt = R.drawable.tac;
+        break;
+        case 1:
+      	  gamePieceTicInt = R.drawable.x;
+          gamePieceTacInt = R.drawable.o;
+        break;
+     
+      }
+		
+	}
+    /**
+     * Assigns listeners to the buttons used for the individuals playing
+     */
+    public void addButtonListener() 
+    {
+
+
+        imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
+        imageButton2=(ImageButton) findViewById(R.id.imageButton2);
+        imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+        imageButton4=(ImageButton) findViewById(R.id.imageButton4);
+        imageButton5 = (ImageButton) findViewById(R.id.imageButton5);
+        imageButton6=(ImageButton) findViewById(R.id.imageButton6);
+        imageButton7 = (ImageButton) findViewById(R.id.imageButton7);
+        imageButton8=(ImageButton) findViewById(R.id.imageButton8);
+        imageButton9 = (ImageButton) findViewById(R.id.imageButton9);
+
+        
+      
+        imageButton1.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+            
+              if(one)
+              {
+             	
+                  position[0][0] = 1;
+                  imageButton1.setBackgroundResource(gamePieceTicInt);
+                  posPlace();
+                one=false;
+              }
+             
+            }
+             
+        
+        });
+        imageButton2.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+           
+           if(two)
+           {
+             position[1][0] = 2;
+             imageButton2.setBackgroundResource(gamePieceTicInt);
+             posPlace();
+             two = false;
+           } 
+           
+           }
+             
+        
+        });
+        imageButton3.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+
+            	if(three)
+            	{
+            	  imageButton3.setBackgroundResource(gamePieceTicInt);
+                  position[2][0] = 3;
+                  posPlace();
+            	 three=false;
+            	}
+            }
+             
+        
+        });
+        imageButton4.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(four)
+              {
+            	  imageButton4.setBackgroundResource(gamePieceTicInt);
+                  position[0][1] = 4;
+                  posPlace();
+              }           
+            }
+             
+        
+        });
+        imageButton5.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(five)
+              {
+            	  imageButton5.setBackgroundResource(gamePieceTicInt);	
+                  position[1][1] = 5;
+                  posPlace();
+                  five = false;
+              }
+            }
+             
+        
+        });
+        imageButton6.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(six)
+              {
+            	  imageButton6.setBackgroundResource(gamePieceTicInt);	
+                  position[2][1] = 6;
+                  posPlace();
+                  six = false;
+                
+              }
+            }
+             
+        
+        });
+        imageButton7.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(seven)
+              {
+            	  imageButton7.setBackgroundResource(gamePieceTicInt);
+                  position[0][2] = 7;
+                  seven =false;
+                  posPlace();
+              }
+                
+              
+            }
+             
+    
+        });
+
+        imageButton8.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(eight)
+              {
+            	  imageButton8.setBackgroundResource(gamePieceTicInt);	
+                  position[1][2] = 8;
+                  eight =false;
+                  posPlace();
+
+              }
+            }
+             
+        
+        });
+        imageButton9.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(nine)
+              {
+            	  imageButton9.setBackgroundResource(gamePieceTicInt);
+                  position[2][2] = 9;
+                  nine =false;
+                  posPlace();
+              }
+                    
+          
+            }
+             
+        
+        });
+
+        
+    
+    }
+    private void setPos(int x, int y)
+    {
+    	
+    		if(x==0)
+    		{
+    			if(y==0)
+    			{
+    				imageButton1.setBackgroundResource(gamePieceTacInt);
+    				one =false;
+    			}
+    			else if(y==1)
+    			{
+    				imageButton2.setBackgroundResource(gamePieceTacInt);    
+    				two = false;
+    			}
+    			else if(y==2)
+    			{
+    				imageButton3.setBackgroundResource(gamePieceTacInt);
+    				three=false;
+    			}
+    		}
+    		else if(x==1)
+    	    {
+    			if(y==0)
+    			{
+    				imageButton4.setBackgroundResource(gamePieceTacInt);
+    				four=false;
+    			}
+    			else if(y==1)
+    			{
+    				imageButton5.setBackgroundResource(gamePieceTacInt);
+    				five= false;
+    			}
+    			else if(y==2)
+    			{
+    				imageButton6.setBackgroundResource(gamePieceTacInt);
+    				six=false;
+    			}
+    	}
+    		else if(x==2)
+    		{
+    			if(y==0)
+    			{
+    				imageButton7.setBackgroundResource(gamePieceTacInt);
+    				seven=false;
+    			}
+    			else if(y==1)
+    			{
+    				imageButton8.setBackgroundResource(gamePieceTacInt);
+    			  eight=false;
+    			}
+    			else if(y==2)
+    			{
+    				imageButton9.setBackgroundResource(gamePieceTacInt);
+    				nine=false;
+    			}
+    		}
+
+    	
+    }
+    public void posPlace()
+    {
+        int x;
+        int y;
+        
+        x = random.nextInt(3);
+        y = random.nextInt(3);
+        System.out.println(" x = "+x +" y = "+y);
+    	int t = position[x][y];
+        if(t == 10)
+        {
+          position[x][y]= 2;
+          setPos(x,y);
+        }
+        else
+        {
+        	posPlace();
+        }
+
+    }
+
+    
+    public void score(String player)
+    {
+
+      if(player.equals("o"))
+      {
+        if(rowOne==3 || rowTwo ==3 || rowThree == 3 || columnOne==3 || 
+     	columnTwo ==3 ||columnThree ==3 || crossOne==3 || crossTwo ==3)
+        {
+          victory(player);
+        }
+      }
+      
+  	  if(player.equals("x"))
+  	  {
+        if(rowOnex==3 || rowTwox ==3 || rowThreex == 3 || columnOnex==3 || 
+	    columnTwox ==3 ||columnThreex ==3 || crossOnex==3 || crossTwox ==3)
+        {
+          victory(player);
+        }
+  	  }
+  	  
+      System.out.println(" one = "+one+ " two = "+ two+ " three = " + three+ " four = "+four+" five = "+
+    		    five+" six = "+six+" seven = "+seven+" eight = "+ eight +" nine = "+nine);
+      
+      if(one==false && two ==false && three ==false && four == false && five
+      ==false && six == false && seven==false && eight==false && nine ==false)
+      {
+        resetButtons();
+      }
+    }
+    
+    public void victory(String exoro)
+    {
+      if(exoro.equals("x"))
+      {
+        winnerName = player1;
+        loserName = player2;
+        names[0] = winnerName;
+        names[1]= loserName;
+        
+	   // tV1.setText(R.string.win);
+		//tV1.setTextSize(75);
+	  //  iV1.setImageResource(R.drawable.tac);
+	   // System.out.println("The tac is the winner!!!");
+       // resetButtons();
+	    //new DisplayMessageActivity(winnerName, (ImageView) findViewById(R.drawable.tic), R.drawable.tic);
+	    sendMessage();
+	    System.exit(1);
+   	  }
+      
+      if(exoro.equals("o"))
+      {
+    	winnerName = player2;
+    	loserName = player1;
+        names[0] = winnerName;
+        names[1]= loserName;
+  	    //tV1.setText(R.string.win);
+ 	 	//tV1.setTextSize(75);
+		//iV1.setImageResource(R.drawable.tic);
+		//System.out.println("o is the winner!!!");
+		// resetButtons();
+	//	new DisplayMessageActivity(winnerName, (ImageView) findViewById(R.drawable.tic), R.drawable.tic);
+	     sendMessage();
+	     System.exit(1);
+	    }
+    }
+    public void resetButtons()
+    {
+
+      		  one = true;
+      		  two = true;
+      		  three = true;
+      		  four = true;
+      		  five = true;
+      		  six = true;
+      		  seven = true;
+      		  eight = true;
+      		  nine = true;
+      		  rowOne=0;
+      		  rowTwo=0;
+      		  rowThree=0;
+      		  columnOne=0;
+      		  columnTwo=0;
+      		  columnThree=0;
+      		  crossOne=0;
+      		  crossTwo=0;
+      		  rowOnex=0;
+      		  rowTwox=0;
+      		  rowThreex=0;
+      		  columnOnex=0;
+      		  columnTwox=0;
+      		  columnThreex=0;
+      		  crossOnex=0;
+      		  crossTwox=0;
+      		  iV1.setImageResource(R.drawable.tictactoe);
+      		  imageButton1.setImageResource(R.drawable.toe);
+      		  imageButton2.setImageResource(R.drawable.toe);
+      		  imageButton3.setImageResource(R.drawable.toe);
+      		  imageButton4.setImageResource(R.drawable.toe);
+      		  imageButton5.setImageResource(R.drawable.toe);
+      		  imageButton6.setImageResource(R.drawable.toe);
+      		  imageButton7.setImageResource(R.drawable.toe);
+      		  imageButton8.setImageResource(R.drawable.toe);
+      		  imageButton9.setImageResource(R.drawable.toe);  
+    }
+	public void sendMessage()
+	{
+	  Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+	  intent.putExtra(EXTRA_MESSAGE, names);
+	  intent.putExtra(nameWin,winnerName);
+	  startActivity(intent);
+	  
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_activity_game, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+}
+}

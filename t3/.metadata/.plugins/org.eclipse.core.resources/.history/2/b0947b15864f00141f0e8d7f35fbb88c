@@ -1,0 +1,1196 @@
+package com.mx262cal726.t3;
+
+import java.util.Random;
+
+import com.mx262cal726.btnfragment.CatsGameDialog;
+import com.mx262cal726.btnfragment.EnterPlayerNamesDialog;
+
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ComputerActivity extends ActionBarActivity implements CatsGameDialog.CatsDialogInterface {
+
+
+	public final static String EXTRA_MESSAGE = "com.example.t3.MESSAGE";
+	public final static String nameWin = "com.example.t3.win";
+	private String[] names = {};
+	private int [][] position;
+	private String gamePieces;
+    ImageButton imageButton1;
+    ImageButton imageButton2;
+    ImageButton imageButton3;
+    ImageButton imageButton4;
+    ImageButton imageButton5;
+    ImageButton imageButton6;
+    ImageButton imageButton7;
+    ImageButton imageButton8;
+    ImageButton imageButton9;
+    private FragmentTransaction fragDialogFragTransaction;
+    public int x, y;
+    ImageView iV1;
+    TextView tV1, tV2;
+    Button newGame, exit;
+    public String p1,p2;
+    private int piecesValue;
+    int ten =10;
+    private int gamePieceTicInt, gamePieceTacInt;
+    String winnerName, loserName,playerOne,playerTwo,player1,player2;
+    long start, stop;
+  
+    Random random;
+    public boolean player;
+    public static int rowOne,rowTwo,rowThree,columnOne,columnTwo,columnThree,crossOne,crossTwo;
+    public static int compRowOne,compRowTwo,compRowThree,compColumnOne,compColumnTwo,compColumnThree,compCrossOne,compCrossTwo;
+    private boolean one=true,two=true,three=true,four=true,five=true,
+    		six=true,seven=true,eight=true,nine=true,startPlayer =true;
+    
+    public ComputerActivity()
+    {
+    	
+    }
+    public ComputerActivity(String player1, String player2)
+    {
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	p1 =player1;
+    	p2=player2;
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	System.out.println(player1 + "  " + player2);
+    	
+    	System.out.println(p1 + "  " + p2);
+    	
+        System.out.println(player1 + "  " + player2);
+
+    }
+     
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_intro);
+		addButtonListener(); 
+		position = new int[3][3];
+		for(int i=0; i<=2; i++)
+		{
+			for(int j=0; j<=2; j++)
+			{
+			  position[i][j] = 10;
+			}
+		}
+		iV1 = (ImageView) findViewById(R.id.iV1);
+		tV1 = (TextView) findViewById(R.id.tV1);
+		//tV2 = (TextView) findViewById(R.id.tV2);
+		tV1.setTextSize(25);
+    	System.out.println(p1 + " this is onCreate " + p2);
+
+    	random = new Random();
+		//tV2.setTextSize(25);
+
+    	
+		Intent intent = getIntent();
+		names = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE);
+		piecesValue = intent.getIntExtra(MainActivity.BUTTON_CHOICE, 0);
+		System.out.println(" piecesValue = " +piecesValue);
+		
+	    setGamePiece(piecesValue);
+		//String win = intent.getStringExtra(MainActivity.nameWin);
+        player1=names[0];
+        player2=names[1];
+        tV1.setText(names[0]+" vs " + names[1]);
+       // tV2.setText(names[1]);
+		
+	}
+	private void setGamePiece(int x)
+	{
+      
+      switch(x)
+      {
+        case 0:
+    	  gamePieceTicInt = R.drawable.tic;
+          gamePieceTacInt = R.drawable.tac;
+        break;
+        case 1:
+      	  gamePieceTicInt = R.drawable.x;
+          gamePieceTacInt = R.drawable.o;
+        break;
+     
+      }
+		
+	}
+    /**
+     * Assigns listeners to the buttons used for the individuals playing
+     */
+    public void addButtonListener() 
+    {
+
+
+        imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
+        imageButton2=(ImageButton) findViewById(R.id.imageButton2);
+        imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+        imageButton4=(ImageButton) findViewById(R.id.imageButton4);
+        imageButton5 = (ImageButton) findViewById(R.id.imageButton5);
+        imageButton6=(ImageButton) findViewById(R.id.imageButton6);
+        imageButton7 = (ImageButton) findViewById(R.id.imageButton7);
+        imageButton8=(ImageButton) findViewById(R.id.imageButton8);
+        imageButton9 = (ImageButton) findViewById(R.id.imageButton9);
+
+        
+      
+        imageButton1.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+            
+              if(one)
+              {
+            	  one=false;
+                  position[0][0] = 1;
+                  imageButton1.setBackgroundResource(gamePieceTicInt);
+                  rowOne++;
+                  columnOne++;
+                  crossOne++;
+        
+                  score("o");
+                  posPlace(); 
+                  
+               
+              }
+             
+            }
+             
+        
+        });
+        imageButton2.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+           
+           if(two)
+           {
+        	   two = false;
+             position[1][0] = 1;
+             imageButton2.setBackgroundResource(gamePieceTicInt);
+             rowOne++;
+             columnTwo++;
+             score("o");
+             posPlace(); 
+             
+            
+           } 
+           
+           }
+             
+        
+        });
+        imageButton3.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+
+            	if(three)
+            	{
+            	  three=false;
+            	  imageButton3.setBackgroundResource(gamePieceTicInt);
+                  position[2][0] = 1;
+                  rowOne++;
+                  columnThree++;
+                  crossTwo++;
+                  score("o");
+                  posPlace(); 
+                  
+            	
+            	}
+            }
+             
+        
+        });
+        imageButton4.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(four)
+              {
+            	  four = false;
+            	  imageButton4.setBackgroundResource(gamePieceTicInt);
+                  position[0][1] = 1;
+                  rowTwo++;
+                  columnOne++;
+                  score("o");
+                  posPlace(); 
+                  
+              }           
+            }
+             
+        
+        });
+        imageButton5.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(five)
+              {
+                  five = false;
+            	  imageButton5.setBackgroundResource(gamePieceTicInt);	
+                  position[1][1] = 1;
+                  rowTwo++;
+                  columnTwo++;
+                  crossTwo++;
+                  crossOne++;
+                  score("o");
+                  posPlace(); 
+                  
+            
+              }
+            }
+             
+        
+        });
+        imageButton6.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(six)
+              {
+            	  six = false;
+            	  imageButton6.setBackgroundResource(gamePieceTicInt);	
+                  position[2][1] = 1;
+                  rowTwo++;
+                  columnThree++;
+                  score("o");
+                  posPlace();
+                  
+                
+                
+              }
+            }
+             
+        
+        });
+        imageButton7.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(seven)
+              {
+            	    seven =false;
+            	  imageButton7.setBackgroundResource(gamePieceTicInt);
+                  position[0][2] = 1;
+              
+                  rowThree++;
+                  columnOne++;
+                  crossTwo++;
+                  score("o");
+                  posPlace(); 
+                  
+              }
+                
+              
+            }
+             
+    
+        });
+
+        imageButton8.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(eight)
+              {
+            	  eight =false;
+            	  imageButton8.setBackgroundResource(gamePieceTicInt);	
+                  position[1][2] = 1;
+                
+                  rowThree++;
+                  columnTwo++;
+                  score("o");
+                  posPlace();
+                  
+
+              }
+            }
+             
+        
+        });
+        imageButton9.setOnClickListener(new OnClickListener() {
+
+            @Override
+
+            public void onClick(View view)
+            {
+              if(nine)
+              {
+            	  nine =false;
+            	  imageButton9.setBackgroundResource(gamePieceTicInt);
+                  position[2][2] = 1;
+                
+                  rowThree++;
+                  columnThree++;
+                  crossOne++;
+                  score("o");
+                  posPlace();  
+                  
+              }
+            }
+        });
+
+    
+    }
+    private void setPos(int x, int y)
+    {
+    	
+    	if(checkMatchToWin())
+    	{
+    if(checkPair())
+    {
+    		if(x==0)
+    		{
+    			if(y==0)
+    			{
+    				imageButton1.setBackgroundResource(gamePieceTacInt);
+    				position[0][0]=2;
+    				compRowOne++;
+    			    compColumnOne++;
+    			    compCrossOne++;
+    				one =false;
+    			}
+    			else if(y==1)
+    			{
+    				imageButton4.setBackgroundResource(gamePieceTacInt);  
+    				position[0][1]=2;
+    				compRowTwo++;
+    			    compColumnOne++;
+    			   
+    				four = false;
+    			}
+    			else if(y==2)
+    			{
+    				imageButton7.setBackgroundResource(gamePieceTacInt);
+    				position[0][2]=2;
+    				compRowThree++;
+    			    compColumnOne++;
+    			    compCrossTwo++;
+    				seven=false;
+    			}
+    		}
+    		else if(x==1)
+    	    {
+    			if(y==0)
+    			{
+    				imageButton2.setBackgroundResource(gamePieceTacInt);
+    				position[1][0]=2;
+    				compRowOne++;
+    			    compColumnTwo++;
+    			   
+    				two=false;
+    			}
+    			else if(y==1)
+    			{
+    				imageButton5.setBackgroundResource(gamePieceTacInt);
+    				position[1][1]=2;
+    				compCrossOne++;
+    				compColumnTwo++;
+    				compCrossTwo++;
+    				compRowTwo++;
+    				five= false;
+    			}
+    			else if(y==2)
+    			{
+    				imageButton8.setBackgroundResource(gamePieceTacInt);
+    				position[1][2]=2;
+    				compRowThree++;
+    			    compColumnTwo++;
+    				eight=false;
+    			}
+    	}
+    		else if(x==2)
+    		{
+    			if(y==0)
+    			{
+    			  imageButton3.setBackgroundResource(gamePieceTacInt);
+    			  position[2][0]=2;
+    			  compRowOne++;
+    			  compColumnThree++;
+    		      compCrossTwo++;
+    				three=false;
+    			}
+    			else if(y==1)
+    			{
+    			  imageButton6.setBackgroundResource(gamePieceTacInt);
+    			  position[2][1]=2;
+    		      compRowTwo++;
+    			  compColumnThree++;
+    			  six=false;
+    			}
+    			else if(y==2)
+    			{
+    			  imageButton9.setBackgroundResource(gamePieceTacInt);
+    			  position[2][2]=2;
+    			  compRowThree++;
+    			  compColumnThree++;
+    			  compCrossOne++;
+    			  nine=false;
+    			}
+    		}
+          }
+    	}
+     score("x");	
+    }
+    
+    private boolean checkPair()
+    {
+      if(rowOne==2 && compRowOne<1)
+      {
+      	if(one)
+       	{
+      	  imageButton1.setBackgroundResource(gamePieceTacInt);
+      	  position[0][0]=2;
+  	      compColumnOne++;
+  	      compRowOne++;
+  	      compCrossOne++;
+       	  one=false;
+       	  
+       	}
+       	else if(two)
+       	{
+      	  imageButton2.setBackgroundResource(gamePieceTacInt);
+          position[1][0]=2;
+  	      compColumnTwo++;
+  	      compRowOne++;
+          two=false;
+            
+       	}
+       	else
+       	{
+      	  imageButton3.setBackgroundResource(gamePieceTacInt);
+          position[2][0]=2;
+      	  compRowOne++;
+	      compColumnThree++;
+	      compCrossTwo++;
+	      three =false;
+        
+       	}
+        score("x");
+      	 return false;
+      }	
+    	
+      else if(rowTwo ==2 && compRowTwo<1)
+      {
+        if(four)
+        {
+       	  imageButton4.setBackgroundResource(gamePieceTacInt);
+       	  position[0][1]=2;
+		  compRowTwo++;
+		  compColumnOne++;
+          four=false;
+         
+        }
+        else if(five)
+        {
+       	  imageButton5.setBackgroundResource(gamePieceTacInt);
+       	  position[1][1]=2;
+			compCrossOne++;
+			compColumnTwo++;
+			compCrossTwo++;
+			compRowTwo++;
+          five=false;
+        }
+        else
+        {
+       	  imageButton6.setBackgroundResource(gamePieceTacInt);
+       	  position[1][2]=2;
+	      compRowTwo++;
+		  compColumnThree++;
+          six =false;
+         
+        }
+      score("x");
+        return false;
+      }
+      
+      else if(rowThree ==2 && compRowThree<1)
+      {
+    	if(seven)
+    	{
+  		  imageButton7.setBackgroundResource(gamePieceTacInt);
+  		  position[0][2]=2;
+	      compRowThree++;
+		  compColumnOne++;
+		  compCrossTwo++;
+    	  seven=false;
+    	}
+    	else if(eight)
+    	{
+  		  imageButton8.setBackgroundResource(gamePieceTacInt);
+  		  position[1][2]=2;
+		  compRowThree++;
+		  compColumnTwo++;
+          eight=false;
+    	}
+    	else
+    	{
+  		  imageButton9.setBackgroundResource(gamePieceTacInt);
+		  compRowThree++;
+		  position[2][2]=2;
+		  compColumnThree++;
+		  compCrossOne++;
+          nine =false;
+    	} 
+    	  score("x");
+    	 return false;
+      }
+      
+      else if(columnOne == 2 && compColumnOne<1)
+      {
+      	if(one)
+      	{
+          imageButton1.setBackgroundResource(gamePieceTacInt);
+          position[0][0]=2;
+			compRowOne++;
+		    compColumnOne++;
+		    compCrossOne++;
+      	  one=false;
+      	}
+      	else if(four)
+      	{
+    		  imageButton4.setBackgroundResource(gamePieceTacInt);
+    		  position[0][1]=2;
+          	  compRowTwo++;
+    	      compColumnOne++;
+            four=false;
+      	}
+      	else
+      	{
+    	   imageButton7.setBackgroundResource(gamePieceTacInt);
+    	   position[0][2]=2;
+			compRowThree++;
+		    compColumnOne++;
+		    compCrossTwo++;
+           seven =false;
+      	}
+        score("x");
+      	 return false;
+      }
+      
+      else if(columnTwo == 2  && compColumnTwo<1)
+      {
+      	if(two)
+      	{
+    		  imageButton2.setBackgroundResource(gamePieceTacInt);
+    		  position[1][0]=2;
+          	  compRowOne++;
+    	      compColumnTwo++;
+      	  two=false;
+      	}
+      	else if(five)
+      	{
+          imageButton5.setBackgroundResource(gamePieceTacInt);
+          position[1][1]=2;
+			compCrossOne++;
+			compColumnTwo++;
+			compCrossTwo++;
+			compRowTwo++;
+          five=false;
+      	}
+      	else
+      	{
+          imageButton7.setBackgroundResource(gamePieceTacInt);
+          position[0][2]=2;
+			compRowThree++;
+		    compColumnOne++;
+		    compCrossTwo++;
+          seven =false;
+      	}  
+        score("x");
+        return false;
+      }
+      
+      else if(columnThree == 2 && compColumnThree<1)
+      {
+      	if(three)
+      	{
+    		  imageButton3.setBackgroundResource(gamePieceTacInt);
+    		  position[2][0]=2;
+          	  compRowOne++;
+    	      compColumnThree++;
+    	      compCrossTwo++;
+      	  three=false;
+      	}
+      	else if(six)
+      	{
+    		  imageButton6.setBackgroundResource(gamePieceTacInt);
+    		  position[2][1]=2;
+          	  compRowTwo++;
+    	      compColumnThree++;
+            six=false;
+      	}
+      	else
+      	{
+    		  imageButton9.setBackgroundResource(gamePieceTacInt);
+    		  position[2][2]=2;
+			  compRowThree++;
+			  compColumnThree++;
+			  compCrossOne++;
+            nine =false;
+      	}  
+          score("x");
+      	 return false;
+      }
+      
+      else if(crossTwo ==2 && compCrossTwo<1)
+      {
+      	if(three)
+      	{
+    		  imageButton3.setBackgroundResource(gamePieceTacInt);
+    		  position[2][0]=2;
+          	  compRowOne++;
+    	      compColumnThree++;
+    	      compCrossTwo++;
+      	  three=false;
+      	}
+      	else if(five)
+      	{
+    		  imageButton5.setBackgroundResource(gamePieceTacInt);
+    		  position[1][1]=2;
+				compCrossOne++;
+				compColumnTwo++;
+				compCrossTwo++;
+				compRowTwo++;
+            five=false;
+      	}
+      	else
+      	{
+    		  imageButton7.setBackgroundResource(gamePieceTacInt);
+    		  position[0][2]=2;
+				compRowThree++;
+			    compColumnOne++;
+			    compCrossTwo++;
+            seven =false;
+      	}
+        score("x");
+      	 return false;
+      	
+      }
+            
+      else if(crossOne ==2 && compCrossOne<1)
+      {
+      	if(one)
+      	{
+    		  imageButton1.setBackgroundResource(gamePieceTacInt);
+    		  position[0][0]=2;
+				compRowOne++;
+			    compColumnOne++;
+			    compCrossOne++;
+      	  one=false;
+      	}
+      	else if(five)
+      	{
+    		  imageButton5.setBackgroundResource(gamePieceTacInt);
+    		  position[1][1]=2;
+				compCrossOne++;
+				compColumnTwo++;
+				compCrossTwo++;
+				compRowTwo++;
+            five=false;
+      	}
+      	else
+      	{
+    		  imageButton9.setBackgroundResource(gamePieceTacInt);
+    		  position[2][2]=2;
+			  compRowThree++;
+			  compColumnThree++;
+			  compCrossOne++;
+            nine =false;
+      	}
+        score("x");
+      	 return false;
+      }
+      return true;
+      
+      
+    }
+
+    private boolean checkMatchToWin()
+    {
+      if(rowOne<1 && compRowOne==2)
+      {
+      	if(one)
+       	{
+      	  imageButton1.setBackgroundResource(gamePieceTacInt);
+      	  position[0][0]=2;
+  	      compColumnOne++;
+  	      compRowOne++;
+  	      compCrossOne++;
+       	  one=false;
+       	  
+       	}
+       	else if(two)
+       	{
+      	  imageButton2.setBackgroundResource(gamePieceTacInt);
+          position[1][0]=2;
+  	      compColumnTwo++;
+  	      compRowOne++;
+          two=false;
+            
+       	}
+       	else
+       	{
+      	  imageButton3.setBackgroundResource(gamePieceTacInt);
+          position[2][0]=2;
+      	  compRowOne++;
+	      compColumnThree++;
+	      compCrossTwo++;
+	      three =false;
+        
+       	}
+        score("x");
+      	 return false;
+      }	
+    	
+      else if(rowTwo<1 && compRowTwo==2)
+      {
+        if(four)
+        {
+       	  imageButton4.setBackgroundResource(gamePieceTacInt);
+       	  position[0][1]=2;
+		  compRowTwo++;
+		  compColumnOne++;
+          four=false;
+         
+        }
+        else if(five)
+        {
+       	  imageButton5.setBackgroundResource(gamePieceTacInt);
+       	  position[1][1]=2;
+			compCrossOne++;
+			compColumnTwo++;
+			compCrossTwo++;
+			compRowTwo++;
+          five=false;
+        }
+        else
+        {
+       	  imageButton6.setBackgroundResource(gamePieceTacInt);
+       	  position[1][2]=2;
+	      compRowTwo++;
+		  compColumnThree++;
+          six =false;
+         
+        }
+      score("x");
+        return false;
+      }
+      
+      else if(rowThree <1 && compRowThree==2)
+      {
+    	if(seven)
+    	{
+  		  imageButton7.setBackgroundResource(gamePieceTacInt);
+  		  position[0][2]=2;
+	      compRowThree++;
+		  compColumnOne++;
+		  compCrossTwo++;
+    	  seven=false;
+    	}
+    	else if(eight)
+    	{
+  		  imageButton8.setBackgroundResource(gamePieceTacInt);
+  		  position[1][2]=2;
+		  compRowThree++;
+		  compColumnTwo++;
+          eight=false;
+    	}
+    	else
+    	{
+  		  imageButton9.setBackgroundResource(gamePieceTacInt);
+  		  position[2][2]=2;
+		  compRowThree++;
+		  compColumnThree++;
+		  compCrossOne++;
+          nine =false;
+    	}
+    	  score("x");
+    	 return false;
+      }
+      
+      else if(columnOne <1  && compColumnOne==2)
+      {
+      	if(one)
+      	{
+          imageButton1.setBackgroundResource(gamePieceTacInt);
+          position[0][0]=2;
+			compRowOne++;
+		    compColumnOne++;
+		    compCrossOne++;
+      	  one=false;
+      	}
+      	else if(four)
+      	{
+    		  imageButton4.setBackgroundResource(gamePieceTacInt);
+    		  position[0][1]=2;
+          	  compRowTwo++;
+    	      compColumnOne++;
+            four=false;
+      	}
+      	else
+      	{
+    	   imageButton7.setBackgroundResource(gamePieceTacInt);
+    	   position[0][2]=2;
+			compRowThree++;
+		    compColumnOne++;
+		    compCrossTwo++;
+           seven =false;
+      	}
+        score("x");
+      	 return false;
+      }
+      
+      else if(columnTwo <1  && compColumnTwo==2)
+      {
+      	if(two)
+      	{
+    		  imageButton2.setBackgroundResource(gamePieceTacInt);
+    		  position[1][0]=2;
+          	  compRowOne++;
+    	      compColumnTwo++;
+      	      two=false;
+      	}
+      	else if(five)
+      	{
+          imageButton5.setBackgroundResource(gamePieceTacInt);
+          position[1][1]=2;
+			compCrossOne++;
+			compColumnTwo++;
+			compCrossTwo++;
+			compRowTwo++;
+          five=false;
+      	}
+      	else
+      	{
+          imageButton8.setBackgroundResource(gamePieceTacInt);
+          position[1][2]=2;
+			compRowThree++;
+		    compColumnTwo++;
+          eight =false;
+      	}  
+        score("x");
+        return false;
+      }
+      
+      else if(columnThree <1 && compColumnThree==2)
+      {
+      	if(three)
+      	{
+    		  imageButton3.setBackgroundResource(gamePieceTacInt);
+    		  position[2][0]=2;
+          	  compRowOne++;
+    	      compColumnThree++;
+    	      compCrossTwo++;
+      	  three=false;
+      	}
+      	else if(six)
+      	{
+    		  imageButton6.setBackgroundResource(gamePieceTacInt);
+    		  position[2][1]=2;
+          	  compRowTwo++;
+    	      compColumnThree++;
+            six=false;
+      	}
+      	else
+      	{
+    		  imageButton9.setBackgroundResource(gamePieceTacInt);
+    		  position[2][2]=2;
+			  compRowThree++;
+			  compColumnThree++;
+			  compCrossOne++;
+            nine =false;
+      	}  
+          score("x");
+      	 return false;
+      }
+      
+      else if(crossTwo<1 && compCrossTwo==2)
+      {
+      	if(three)
+      	{
+    		  imageButton3.setBackgroundResource(gamePieceTacInt);
+    		  position[2][0]=2;
+          	  compRowOne++;
+    	      compColumnThree++;
+    	      compCrossTwo++;
+      	  three=false;
+      	}
+      	else if(five)
+      	{
+    		  imageButton5.setBackgroundResource(gamePieceTacInt);
+    		  position[1][1]=2;
+				compCrossOne++;
+				compColumnTwo++;
+				compCrossTwo++;
+				compRowTwo++;
+            five=false;
+      	}
+      	else
+      	{
+    		  imageButton7.setBackgroundResource(gamePieceTacInt);
+    		  position[0][2]=2;
+				compRowThree++;
+			    compColumnOne++;
+			    compCrossTwo++;
+            seven =false;
+      	}
+        score("x");
+      	 return false;
+      	
+      }
+            
+      else if(crossOne<1 && compCrossOne==2)
+      {
+      	if(one)
+      	{
+    		  imageButton1.setBackgroundResource(gamePieceTacInt);
+    		  position[0][0]=2;
+				compRowOne++;
+			    compColumnOne++;
+			    compCrossOne++;
+      	  one=false;
+      	}
+      	else if(five)
+      	{
+    		  imageButton5.setBackgroundResource(gamePieceTacInt);
+    		  position[1][1]=2;
+				compCrossOne++;
+				compColumnTwo++;
+				compCrossTwo++;
+				compRowTwo++;
+            five=false;
+      	}
+      	else
+      	{
+    		  imageButton9.setBackgroundResource(gamePieceTacInt);
+    		  position[2][2]=2;
+			  compRowThree++;
+			  compColumnThree++;
+			  compCrossOne++;
+            nine =false;
+      	}
+        score("x");
+      	 return false;
+      }
+      return true;
+      
+      
+    }
+    
+    
+    public void posPlace()
+    {
+        int x;
+        int y;
+        System.out.println(" r1 = "+rowOne+" row2 = "+  rowTwo+" rowThree ="+  rowThree  +" columnOne = "+columnOne +" columnTwo = "+
+     	columnTwo+" columnThree  = "+ columnThree +" crossOne = "+ crossOne +" crossTwo = "+crossTwo );
+        x = random.nextInt(3);
+        y = random.nextInt(3);
+        System.out.println(" x = "+x +" y = "+y);
+    	int t = position[x][y];
+    	System.out.println("pos place = "+ t);
+        if(t == 10)
+        {
+          position[x][y]= 2;
+        	System.out.println("position = "+ position.toString());
+          setPos(x,y);
+        }
+        else
+        {
+        	posPlace();
+        	
+        }
+
+    }
+
+    
+    public void score(String player)
+    {
+
+      if(player.equals("o"))
+      {
+        if(rowOne==3 || rowTwo ==3 || rowThree == 3 || columnOne==3 || 
+     	columnTwo ==3 ||columnThree ==3 || crossOne==3 || crossTwo ==3)
+        {
+
+          victory(player);
+        }
+      }
+      
+  	  if(player.equals("x"))
+  	  {
+        if(compRowOne==3 || compRowTwo ==3 || compRowThree == 3 || compColumnOne==3 || 
+	    compColumnTwo ==3 ||compColumnThree ==3 || compCrossOne==3 || compCrossTwo ==3)
+        {
+        	
+          victory(player);
+        }
+  	  }
+  	  
+      System.out.println(" one = "+one+ " two = "+ two+ " three = " + three+ " four = "+four+" five = "+
+    		    five+" six = "+six+" seven = "+seven+" eight = "+ eight +" nine = "+nine);
+      
+      if(one==false && two ==false && three ==false && four == false && five
+      ==false && six == false && seven==false && eight==false && nine ==false)
+      {
+        catsGame();
+      }
+    }
+    
+    private void catsGame()
+    {
+    	
+		DialogFragment dialogFrag = new CatsGameDialog();
+		dialogFrag.show(getSupportFragmentManager(), "CatsGameDialog");
+		resetButtons(); 
+
+    }
+    
+    public void victory(String exoro)
+    {
+      if(exoro.equals("x"))
+      {
+        winnerName = player1;
+        loserName = player2;
+        names[0] = winnerName;
+        names[1]= loserName;
+        
+
+        resetButtons();
+	    sendMessage();
+	    onDestroy();
+	    System.exit(1);
+   	  }
+      
+      if(exoro.equals("o"))
+      {
+    	winnerName = player2;
+    	loserName = player1;
+        names[0] = winnerName;
+        names[1]= loserName;
+
+	     resetButtons();
+	     sendMessage();
+	     onDestroy();
+	     System.exit(1);
+	    }
+    }
+    public void resetButtons()
+    {
+
+      		  one = true;
+      		  two = true;
+      		  three = true;
+      		  four = true;
+      		  five = true;
+      		  six = true;
+      		  seven = true;
+      		  eight = true;
+      		  nine = true;
+      		  rowOne=0;
+      		  rowTwo=0;
+      		  rowThree=0;
+      		  columnOne=0;
+      		  columnTwo=0;
+      		  columnThree=0;
+      		  crossOne=0;
+      		  crossTwo=0;
+      		  compRowOne=0;
+      		  compRowTwo=0;
+      		  compRowThree=0;
+      		  compColumnOne=0;
+      		  compColumnTwo=0;
+      		  compColumnThree=0;
+      		  compCrossOne=0;
+      		  compCrossTwo=0;
+      		  iV1.setImageResource(R.drawable.tictactoe);
+      		  imageButton1.setBackgroundResource(R.drawable.toe);
+      		  imageButton2.setBackgroundResource(R.drawable.toe);
+      		  imageButton3.setBackgroundResource(R.drawable.toe);
+      		  imageButton4.setBackgroundResource(R.drawable.toe);
+      		  imageButton5.setBackgroundResource(R.drawable.toe);
+      		  imageButton6.setBackgroundResource(R.drawable.toe);
+      		  imageButton7.setBackgroundResource(R.drawable.toe);
+      		  imageButton8.setBackgroundResource(R.drawable.toe);
+      		  imageButton9.setBackgroundResource(R.drawable.toe);
+      		for(int i=0; i<=2; i++)
+    		{
+    			for(int j=0; j<=2; j++)
+    			{
+    			  position[i][j] = 10;
+    			  System.out.println("position  i = " +i+" j = "+j+"  " +position[i][j]);
+    			}
+    		}
+    }
+	public void sendMessage()
+	{
+	  Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+	  intent.putExtra(EXTRA_MESSAGE, names);
+	  intent.putExtra(nameWin,winnerName);
+	  startActivity(intent);
+	  
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_activity_game, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+}
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+    <LinearLayout
+        android:id="@+id/buttonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="27dp" >
+
+        <Button
+            android:id="@+id/ticButton"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@+string/ticString"
+            />
+
+        <Button
+            android:id="@+id/orangeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@+string/orangeString"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/imageId"
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buttonId"
+        android:layout_marginTop="56dp" >
+
+        <ImageView
+            android:id="@+id/ticCartoon"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:src="@drawable/tic_choice" />
+
+        <ImageView
+            android:id="@+id/orangeAndPurple"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_choice" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TicTacToe</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="iB1">button 1</string>
+    <string name="action_settings">Settings</string>
+    <string name="win">Winner!!!</string>
+    <string name="reset">New Game</string>
+    <string name="exit">End Game</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="title_activity_main_activity_game">MainActivityGame</string>
+    <string name="newGame">Start Game</string>
+    <string name="score">Leader Board</string>
+    <string name="player1">Player One Enter Name</string>
+    <string name="player2">Player Two Enter Name</string>
+    <string name="desc">Front display image</string>
+    <string name="title">Tic Tac Toe</string>
+    <string name="skipVid">Skip to New Game</string>
+    <string name="quit">Quit Game</string>
+    <string name="ticString">Cartoon Pieces</string>
+    <string name="orangeString">Orange n Purple</string>
+    <string name="displayButtonChoice">Game Pieces: </string>
+    <string name="mmenu">MainMenu</string>
+    <string name="pieces">Game Pieces</string>
+    <string name="title_activity_score_board">ScoreBoard</string>
+    <string name="leader">Leader Board</string>
+    <string name="name">Name</string>
+    <string name="name_dialog">Stores the players names</string>
+    <string name="wins">Wins</string>
+    <string name="enterPlayerOneName">Player One Name</string>
+    <string name="enterPlayerTwoName">Player Two Name</string>
+    <string name="setNames"> Players </string>
+
+    <string-array name="button_choices">
+        <item>Choose Game Pieces</item>
+        <item>Orange and Purple</item>
+        <item>Image Buttons</item>
+    </string-array>
+
+    <color name="mycolor1">#0A0D21</color>
+    <color name="mycolor2">#0D122E</color>
+    <color name="mycolor3">#111739</color>
+    <color name="mycolor4">#181F48</color>
+    <color name="mycolor5">#1D2451</color>
+    <color name="mycolor6">#2B3364</color>
+    <color name="mycolor7">#2B3364</color>
+    <color name="mycolor8">#F5DC49</color>
+
+    <string name="zero">0</string>
+    <string name="loses">Loses</string>
+    <string name="title_activity_fragment">FragmentActivity</string>
+    <string name="title_activity_frag">FragActivity</string>
+    <string name="title_activity_gn">GnActivity</string>
+    <string name="title_activity_single_play">SinglePlayActivity</string>
+
+</resources>

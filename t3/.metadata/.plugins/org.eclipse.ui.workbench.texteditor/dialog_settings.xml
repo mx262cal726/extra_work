@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="652" key="DIALOG_X_ORIGIN"/>
+		<item value="363" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="RowOne" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="rowOne"/>
+			<item value="posPlace();"/>
+			<item value="ion[2][2] = 9;"/>
+			<item value=" posPlace();"/>
+			<item value="setBackgroundResource(gamePieceTacInt);"/>
+			<item value="columnOnex"/>
+			<item value="columnTwox"/>
+			<item value="columnThreex"/>
+		</list>
+		<list key="replacehistory">
+			<item value="compRowOne"/>
+			<item value="posPlace();  score(&quot;o&quot;);"/>
+			<item value="posPlace();"/>
+			<item value="score(&quot;o&quot;);"/>
+			<item value="compColumnOne"/>
+			<item value="compColumnTwo"/>
+			<item value="compColumnThree"/>
+			<item value="compRowThree"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="305" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="444" key="DIALOG_HEIGHT"/>
+		<item value="155" key="DIALOG_X_ORIGIN"/>
+		<item value="259" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
